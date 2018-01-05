@@ -2,8 +2,8 @@ set nocompatible
 set number
 set encoding=utf-8
 execute pathogen#infect()
-syntax on
 filetype plugin indent on
+syntax on
 call pathogen#helptags()
 "size of a hard tabstop
 set tabstop=8
@@ -26,7 +26,7 @@ nmap <c-s> :w<CR>
 imap <c-s> <Esc>:w<CR>a
 set incsearch
 set hls
-"set shell=powershell
+" set shell=powershell
 "set shellcmdflag=-command
 set foldmethod=indent
 match errorMsg /[^\t]\zs\t\+/
@@ -136,7 +136,7 @@ inoremap II <Esc>I
 inoremap AA <Esc>A
 inoremap OO <Esc>O
 inoremap CC <Esc>C
-inoremap SS <Esc>S
+" inoremap SS <Esc>S
 inoremap DD <Esc>dd
 inoremap UU <Esc>u
 
@@ -147,9 +147,9 @@ inoremap UU <Esc>u
 
 :autocmd BufNewFile,BufRead *.html setlocal nowrap
 
-Abolish teh the
-Abolish hte the
-Abolish colour{,s,ed,ing} color{}
+" Abolish teh the
+" Abolish hte the
+" Abolish colour{,s,ed,ing} color{}
 
 set hidden
 
@@ -165,3 +165,31 @@ nnoremap <leader>g :TlistToggle<CR>
 
 let g:indentLine_fileTypeExclude=['help']
 let g:indentLine_bufNameExclude=['NERD_tree.*']
+
+let g:EasyGrepOptionPrefix='<leader>vy'
+
+"{{{command to work with marks set in the buffer
+    function! s:Marks()
+	marks abcdefghijklmnopqrstuvwxyz.
+	echo 'Jump to mark: '
+	let marks = nr2char(getchar())
+	redraw
+	execute 'normal! `' . marks
+    endfunction
+
+    command! Marks call s:Marks()
+"}}}
+
+"{{{ insert date time
+    :nnoremap <F6> "=strftime("%c")<CR>P
+    :inoremap <F6> <C-R>=strftime("%c")<CR>
+"}}}
+"enable mouse in insert mode only
+"https://vi.stackexchange.com/questions/12140/how-to-disable-moving-the-cursor-with-the-mouse
+set mouse=i
+
+" map <c-f> :call JsBeautify()<cr>
+" let g:editorconfig_Beautifier = C:\Users\b41395\.editorconfig
+noremap <F3> :Autoformat<CR>
+au BufNewFile,BufRead *.vue set filetype=html
+" let g:NERDTreeMouseMode = 3
